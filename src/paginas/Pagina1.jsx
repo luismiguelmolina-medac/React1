@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import './pagina1.css'
+import { UserContext } from '../context/userContext';
 
 
 function Pagina1({ mensaje }) {
@@ -24,10 +25,11 @@ function Pagina1({ mensaje }) {
   for (let i = 0; i < numeros.length; i++) {
     html.push(<li>{numeros[i]}</li>);
   }
+  const { user, setUser } = useContext(UserContext);
 
   return (
     <>
-      <h1>Hola Mundo {nombre}</h1>
+      <h1>Hola Mundo {user} </h1>
       <h3>{numero}</h3>
       <button onClick={() => {
         let x = generarNumero();
@@ -35,6 +37,7 @@ function Pagina1({ mensaje }) {
         setGenerados([...generados, x]);
       }
       }>Número</button>
+      <button onClick={() => setUser("Ana")}>Cambiar a Ana</button>
       <p>{mensaje}</p>
       <ul>
         {generados.map((num) => (
